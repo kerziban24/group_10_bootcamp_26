@@ -112,12 +112,6 @@ Sprint 2'de eklenmesi gereken özellikler (n8n/Make otomasyonu, sentiment taggin
 
 **Sprint Review katılımcıları**
 
-- İSİM
-- İSİM
-- İSİM
-- İSİM
-- İSİM
-
 ---
 
 ## 🔄 Sprint Retrospective
