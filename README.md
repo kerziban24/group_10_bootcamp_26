@@ -48,7 +48,7 @@ Sabah Turu, kullanıcıların takip ettiği hisse senetleri, sektörler ve piyas
 
 ## 🔗 Product Backlog URL
 
-[Miro Backlog Board](MİRO_LİNKİNİZİ_BURAYA_EKLEYİN)
+[Miro Backlog Board](https://miro.com/app/board/uXjVH-wP4D8=/?share_link_id=786246253629)
 
 ---
 
@@ -58,7 +58,10 @@ Sabah Turu, kullanıcıların takip ettiği hisse senetleri, sektörler ve piyas
 
 **Backlog düzeni ve Story seçimleri**
 
-Backlog'umuz, ürünün temel iskeletini (veri modeli, ilk API bağlantıları, boş arayüz) kurmayı hedefleyen story'lere göre düzenlenmiştir. Sprint başına tahmin edilen puan sayısını geçmeyecek şekilde sıradan seçimler yapılmıştır. Story başına çıkan tahmin puanı, toplam puanın yarısından az tutulmuştur. Story'ler yapılacak işlere (task'lere) bölünmüştür.
+Backlog'umuz, ürünün temel iskeletini (veri modeli, ilk API bağlantıları, boş arayüz) kurmayı hedefleyen story'lere göre düzenlenmiştir. Sprint başına tahmin edilen puan sayısını geçmeyecek şekilde sıradan seçimler yapılmıştır. Story başına çıkan tahmin puanı, toplam puanın yarısından az tutulmuştur. Story'ler yapılacak işlere (task'lere) bölünmüştür. 
+
+<img width="1812" height="628" alt="image" src="https://github.com/user-attachments/assets/352ffd0d-2d6c-46d3-8896-794d3e413465" />
+
 
 Miro Board'da gözüken;
 
