@@ -1,7 +1,7 @@
 Takım 10
 
-Ürün İle İlgili Bilgiler
-Takım Elemanları
+#Ürün İle İlgili Bilgiler
+##Takım Elemanları
 
 * Sümeyye Köse: Product Owner
 * Yasemin Akgül: Scrum Master
@@ -9,14 +9,14 @@ Takım Elemanları
 * Mehmet Anıl Köse: Team Member/Developer
 * Ahmet Kağan Ertürk: Team Member/Developer
 
-Ürün İsmi
+##Ürün İsmi
 --Sabah Turu--
 
-Ürün Açıklaması
+##Ürün Açıklaması
 
 * Sabah Turu, kullanıcıların takip ettiği hisse senetleri, sektörler ve piyasa endekslerine özel, her sabah otomatik olarak üretilen kişiselleştirilmiş bir piyasa brifingi sunan bir web uygulamasıdır. Bir yapay zeka ajanı gece boyunca oluşan haberleri ve fiyat hareketlerini tarar, kullanıcının portföyüne göre önem sırasına koyar, duygu analizi yapar ve kısa bir özet üretir. Kullanıcılar ayrıca bir sohbet arayüzü üzerinden portföyleriyle ilgili doğal dilde sorular sorabilir.
 
-Ürün Özellikleri
+##Ürün Özellikleri
 
 * Kişiselleştirilmiş watchlist ve portföy yönetimi
 * Her sabah otomatik üretilen AI destekli piyasa brifingi (özet + duygu skoru)
@@ -25,17 +25,17 @@ Takım Elemanları
 * E-posta ile günlük brifing gönderimi
 * Kullanıcı etkileşim geçmişine dayalı kişiselleştirme (hafıza)
 
-Hedef Kitle
+##Hedef Kitle
 
 * Bireysel yatırımcılar
 * Finansal piyasaları takip eden öğrenciler
 * Piyasa haberlerini tek kaynaktan takip etmek isteyen profesyoneller
 * 18 - 55 yaş arası kullanıcılar
 
-Product Backlog URL
+##Product Backlog URL
 [Miro Backlog Board](MİRO_LİNKİNİZİ_BURAYA_EKLEYİN)
 
-Sprint 1
+#Sprint 1
 
 * Backlog düzeni ve Story seçimleri: Backlog'umuz, ürünün temel iskeletini (veri modeli, ilk API bağlantıları, boş arayüz) kurmayı hedefleyen story'lere göre düzenlenmiştir. Sprint başına tahmin edilen puan sayısını geçmeyecek şekilde sıradan seçimler yapılmıştır. Story başına çıkan tahmin puanı, toplam puanın yarısından az tutulmuştur. Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözüken kırmızı item'lar yapılacak işleri (task) gösterirken, mavi item'lar story'leri temsil etmektedir.
 
@@ -56,6 +56,6 @@ Sprint 1
    * Tahmin puanları gözden geçirilmeli ve sprint planlama toplantılarında developer'ların geri bildirim vermesine daha fazla zaman ayrılmalı
    * API entegrasyonları için ayrılan efor/saat, rate-limit ve hata yönetimi göz önüne alınarak artırılmalı
 
-Sprint 2
+#Sprint 2
 
-Sprint 3
+#Sprint 3
