@@ -1,4 +1,4 @@
-# 🚀 Takım 10
+# 🚀 Takım 10 - Fintel
 
 ---
 
@@ -88,6 +88,11 @@ Daily Scrum toplantılarının zamansal sebeplerden ötürü Slack üzerinden as
 ## 💻 Ürün Durumu
 
 **Ekran görüntüleri:**
+
+<img width="1600" height="760" alt="WhatsApp Image 2026-07-03 at 22 47 54" src="https://github.com/user-attachments/assets/0eb601cb-f603-427a-87aa-e34b09b38cd2" />
+
+<img width="1600" height="485" alt="WhatsApp Image 2026-07-03 at 22 48 02" src="https://github.com/user-attachments/assets/c3224de4-7dac-46f5-ae5b-01f4b4f13180" />
+
 
 [Sprint 1 Ürün Durumu](docs/sprint-1/urun-durumu-screenshot.png)
 
