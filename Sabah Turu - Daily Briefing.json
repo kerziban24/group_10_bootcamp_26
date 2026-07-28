@@ -1,0 +1,380 @@
+{
+  "name": "Sabah Turu - Daily Briefing",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 6 * * *"
+            }
+          ]
+        }
+      },
+      "name": "Every Morning 06:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "id": "b03aab14-e63e-4478-a6c7-a80843050133",
+      "position": [
+        -224,
+        144
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://finnhub.io/api/v1/news",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "category",
+              "value": "general"
+            },
+            {
+              "name": "token",
+              "value": "d9ki7hhr01qshkrmq7cgd9ki7hhr01qshkrmq7d0"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Get Market News",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "id": "676b697a-2772-4dd9-85fe-2d75ba529dc9",
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const news = $input.first().json;\nconst list = Array.isArray(news) ? news : [];\nconst top = list.slice(0, 6).map(n => `- ${n.headline} (${n.source})`).join('\\n');\nreturn [{ json: { headlinesBlock: top } }];"
+      },
+      "name": "Format News",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "id": "ff6ce2f8-9c2b-47d1-8485-55a79ea0f2f7",
+      "position": [
+        224,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const tickers = ['AAPL','MSFT','TSLA','NVDA','GOOGL'];\nreturn tickers.map(t => ({ json: { ticker: t } }));"
+      },
+      "name": "Ticker List",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "id": "a22881cd-a538-4f4d-a1af-a751ccdba234",
+      "position": [
+        0,
+        288
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://finnhub.io/api/v1/quote",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "symbol",
+              "value": "={{$json.ticker}}"
+            },
+            {
+              "name": "token",
+              "value": "d9ki7hhr01qshkrmq7cgd9ki7hhr01qshkrmq7d0"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Get Quote",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "id": "c3035275-6149-4c22-83e4-04b161e7440d",
+      "position": [
+        224,
+        288
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst tickerItems = $('Ticker List').all();\nreturn items.map((item, i) => {\n  const ticker = tickerItems[i] ? tickerItems[i].json.ticker : 'UNKNOWN';\n  return { json: { ticker, ...item.json } };\n});"
+      },
+      "name": "Attach Ticker",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "id": "64c690c6-6c42-42c0-b366-51c95348b82e",
+      "position": [
+        448,
+        288
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst newsBlock = $('Format News').first().json.headlinesBlock;\nlet priceBlock = '';\nfor (const item of items) {\n  const d = item.json;\n  const changePct = d.pc ? (((d.c - d.pc) / d.pc) * 100).toFixed(2) : 'N/A';\n  priceBlock += `${d.ticker}: $${d.c} (${changePct}% change)\\n`;\n}\nconst today = new Date().toISOString().slice(0, 10);\nconst promptText = `You are writing a short daily market briefing in Turkish for a retail investor.\\n\\nToday's prices:\\n${priceBlock}\\nToday's top market headlines:\\n${newsBlock}\\n\\nWrite a 3-paragraph briefing: (1) overall market mood, (2) what happened with each ticker and why it matters, (3) one thing to watch tomorrow. Keep it under 200 words, friendly but precise tone, written in Turkish.`;\nconst claudeBody = JSON.stringify({\n  model: 'claude-sonnet-5',\n  max_tokens: 600,\n  messages: [{ role: 'user', content: promptText }]\n});\nreturn [{ json: { date: today, priceBlock, newsBlock, claudeRequestBody: claudeBody } }];"
+      },
+      "name": "Aggregate All Tickers",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "id": "cbdea375-9b5a-415a-b451-e25fe05d9579",
+      "position": [
+        672,
+        144
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const res = $input.first().json;\nconst textBlock = (res.content || []).map(c => c.text).join('\\n');\nconst date = $('Aggregate All Tickers').first().json.date;\nconst emailBody = JSON.stringify({\n  from: 'Sabah Turu <briefing@yourdomain.com>',\n  to: ['you@example.com'],\n  subject: `Sabah Turu - ${date}`,\n  html: `<p>${textBlock.replace(/\\n/g, '<br>')}</p>`\n});\nreturn [{ json: { date, summary: textBlock, emailRequestBody: emailBody } }];"
+      },
+      "name": "Parse AI Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "id": "0a9f7627-8f71-477d-b8f0-a263c4b6c505",
+      "position": [
+        1472,
+        144
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "YOUR_AIRTABLE_BASE_ID",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "DailyBriefing",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Date": "={{$json.date}}",
+            "Summary": "={{$json.summary}}"
+          }
+        },
+        "options": {}
+      },
+      "name": "Save to Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "id": "2c7625a8-53e3-40d5-9781-d60431c41212",
+      "position": [
+        1696,
+        144
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "re_N9bWHQ5D_LHd3VY9xMKTDCC7FKHtC1sfA"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{$('Parse AI Response').item.json.emailRequestBody}}",
+        "options": {}
+      },
+      "name": "Send Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "id": "5a4c20e0-1876-4c3f-99d6-0591939bc00b",
+      "position": [
+        1920,
+        144
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        896,
+        144
+      ],
+      "id": "b5cd63d0-afc2-4fa7-9a79-d4159aafae91",
+      "name": "When chat message received",
+      "webhookId": "9589272b-0a22-4f41-a103-185d285865cc"
+    },
+    {
+      "parameters": {
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        1056,
+        -96
+      ],
+      "id": "f533d3a4-6b54-4000-a8a7-4dc90076b912",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        1264,
+        160
+      ],
+      "id": "194049fc-98f1-4bae-871b-679fdfd83dea",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "fJjCbt6LiqAGy6Yv",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Every Morning 06:00": {
+      "main": [
+        [
+          {
+            "node": "Get Market News",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Ticker List",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Market News": {
+      "main": [
+        [
+          {
+            "node": "Format News",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ticker List": {
+      "main": [
+        [
+          {
+            "node": "Get Quote",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Quote": {
+      "main": [
+        [
+          {
+            "node": "Attach Ticker",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Attach Ticker": {
+      "main": [
+        [
+          {
+            "node": "Aggregate All Tickers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate All Tickers": {
+      "main": [
+        [
+          {
+            "node": "Parse AI Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse AI Response": {
+      "main": [
+        [
+          {
+            "node": "Save to Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save to Airtable": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "ba8c2309-56cd-4bfe-9180-f26c53a371da",
+  "meta": {
+    "instanceId": "0c6ef517d8133a1162682fbd95dd4803e76627c5763a4c5867395bf70f6e673d"
+  },
+  "nodeGroups": [],
+  "id": "DeXN25656yFivZhv",
+  "tags": []
+}
