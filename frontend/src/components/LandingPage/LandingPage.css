@@ -1,0 +1,518 @@
+.landing-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  background-color: var(--bg-primary);
+  box-sizing: border-box;
+}
+
+.landing-top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border-color);
+  width: 100%;
+}
+
+.landing-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--text-primary);
+}
+
+.text-coffee {
+  color: var(--accent-coffee);
+}
+
+.landing-top-badge {
+  background: rgba(176, 126, 77, 0.1);
+  color: var(--accent-coffee);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  border: 1px solid rgba(176, 126, 77, 0.15);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Centered Hero Section */
+.landing-hero-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 60px 0 40px 0;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.pitch-tag {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-coffee);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+}
+
+.hero-headline {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.hero-headline span {
+  color: var(--accent-coffee);
+}
+
+.hero-subtext {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 30px;
+  max-width: 680px;
+}
+
+/* Centered Registration / Login Box */
+.registration-box {
+  width: 100%;
+  max-width: 480px;
+  padding: 24px;
+  border-radius: 18px;
+  background: var(--bg-card);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
+  text-align: left;
+}
+
+/* Auth Tabs styling */
+.auth-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+.auth-tab {
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px 16px;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.auth-tab:hover {
+  color: var(--text-secondary);
+}
+
+.auth-tab.active {
+  color: var(--accent-coffee);
+}
+
+.auth-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -11px;
+  left: 0;
+  width: 100%;
+  height: 2.5px;
+  background-color: var(--accent-coffee);
+  border-radius: 2px;
+}
+
+.form-error-msg {
+  background: rgba(214, 81, 81, 0.08);
+  border: 1px solid rgba(214, 81, 81, 0.2);
+  color: var(--color-bearish);
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  justify-content: center;
+}
+
+/* Auth forms */
+.register-form-auth {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-input-wrapper {
+  width: 100%;
+}
+
+.auth-input {
+  width: 100%;
+}
+
+.auth-select {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  color: var(--text-primary);
+  padding: 12px;
+  font-family: inherit;
+  font-size: 13.5px;
+  outline: none;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  width: 100%;
+}
+
+.auth-select:focus {
+  border-color: var(--accent-coffee);
+}
+
+/* Action submit button */
+.btn-start-submit-auth {
+  background: linear-gradient(135deg, var(--accent-coffee) 0%, var(--accent-gold) 100%);
+  color: #ffffff;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(176, 126, 77, 0.2);
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 6px;
+}
+
+.btn-start-submit-auth:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(176, 126, 77, 0.35);
+}
+
+/* 3-Feature Highlights grid */
+.landing-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  padding: 50px 0;
+  border-top: 1px solid var(--border-color);
+  width: 100%;
+}
+
+.highlight-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.highlight-icon {
+  background: rgba(176, 126, 77, 0.1);
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.highlight-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 4px;
+}
+
+.highlight-card p {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  max-width: 280px;
+}
+
+/* Footer styling */
+.landing-footer {
+  padding: 30px 0;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-muted);
+  width: 100%;
+  margin-top: auto;
+}
+
+@media (max-width: 900px) {
+  .landing-hero-center {
+    padding: 40px 0;
+  }
+  .hero-headline {
+    font-size: 34px;
+  }
+  .landing-highlights {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   KAHVE DÖKÜLME LOADER — Tam SVG Animasyon Sistemi
+   ═══════════════════════════════════════════════ */
+
+.preparing-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20000;
+  animation: fadeIn 0.35s ease;
+}
+
+.preparing-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  animation: scaleIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  max-width: 380px;
+  padding: 40px 32px;
+}
+
+/* ── SVG Sahne ── */
+.coffee-scene {
+  width: 180px;
+  height: 198px;
+  position: relative;
+}
+
+.coffee-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* ── Cezve eğilme ── */
+.pour-pot {
+  transform-origin: 162px 52px;
+  animation: potTilt 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+  transform: rotate(0deg);
+}
+
+@keyframes potTilt {
+  0%   { transform: rotate(0deg); }
+  60%  { transform: rotate(-38deg); }
+  80%  { transform: rotate(-34deg); }
+  100% { transform: rotate(-36deg); }
+}
+
+/* ── Ana kahve akışı ── */
+.stream-main {
+  stroke-dasharray: 90;
+  stroke-dashoffset: 90;
+  animation: drawStream 0.5s ease-out 0.7s forwards;
+}
+
+@keyframes drawStream {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ── İnce yan damlacık ── */
+.stream-thin {
+  stroke-dasharray: 80;
+  stroke-dashoffset: 80;
+  animation: drawStream 0.6s ease-out 0.85s forwards;
+}
+
+/* ── Uç damla ── */
+.drop-end {
+  opacity: 0;
+  animation: dropAppear 0.3s ease 1.2s forwards,
+             dropWobble 1.2s ease-in-out 1.5s infinite;
+}
+
+@keyframes dropAppear {
+  to { opacity: 1; }
+}
+
+@keyframes dropWobble {
+  0%, 100% { transform: scaleY(1)   scaleX(1); }
+  25%       { transform: scaleY(1.2) scaleX(0.9); }
+  50%       { transform: scaleY(0.9) scaleX(1.1); }
+  75%       { transform: scaleY(1.1) scaleX(0.95); }
+}
+
+/* ── Kahve dolum seviyesi ── */
+.coffee-fill-rect {
+  transform: translateY(56px);
+  animation: coffeeFill 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards;
+}
+
+@keyframes coffeeFill {
+  0%   { transform: translateY(56px); }
+  100% { transform: translateY(14px); }
+}
+
+/* ── Köpük yüzey ── */
+.foam-surface {
+  opacity: 0;
+  transform: translateY(42px) scaleX(0.3);
+  animation: foamRise 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards;
+}
+
+@keyframes foamRise {
+  0%   { opacity: 0;   transform: translateY(42px) scaleX(0.3); }
+  60%  { opacity: 0.5; }
+  100% { opacity: 0.8; transform: translateY(0px)  scaleX(1); }
+}
+
+/* ── Buhar animasyonları ── */
+.steam {
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+}
+
+.s1 {
+  animation: steamRise 1.4s ease-in-out 2.2s infinite;
+}
+.s2 {
+  animation: steamRise 1.4s ease-in-out 2.5s infinite;
+}
+.s3 {
+  animation: steamRise 1.4s ease-in-out 2.8s infinite;
+}
+
+@keyframes steamRise {
+  0%   { opacity: 0;   stroke-dashoffset: 50; transform: translateY(8px); }
+  20%  { opacity: 0.7; }
+  80%  { opacity: 0.4; stroke-dashoffset: 0;  transform: translateY(0px); }
+  100% { opacity: 0;   stroke-dashoffset: 0;  transform: translateY(-6px); }
+}
+
+/* ── Sıçrama damlaları ── */
+.sp1 {
+  animation: splashPop 0.6s ease-out 1.3s forwards,
+             splashFade 0.4s ease 1.7s forwards;
+}
+.sp2 {
+  animation: splashPop2 0.6s ease-out 1.4s forwards,
+             splashFade 0.4s ease 1.8s forwards;
+}
+.sp3 {
+  animation: splashPop3 0.5s ease-out 1.35s forwards,
+             splashFade 0.4s ease 1.75s forwards;
+}
+
+@keyframes splashPop {
+  0%   { opacity: 0; transform: translate(0,0); }
+  40%  { opacity: 1; }
+  100% { opacity: 1; transform: translate(-8px, -10px); }
+}
+@keyframes splashPop2 {
+  0%   { opacity: 0; transform: translate(0,0); }
+  40%  { opacity: 1; }
+  100% { opacity: 1; transform: translate(10px, -8px); }
+}
+@keyframes splashPop3 {
+  0%   { opacity: 0; transform: translate(0,0); }
+  40%  { opacity: 1; }
+  100% { opacity: 1; transform: translate(-4px, -14px); }
+}
+@keyframes splashFade {
+  to { opacity: 0; }
+}
+
+/* ── Başlık ve metin ── */
+.preparing-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+  animation: fadeIn 0.5s ease 0.3s both;
+}
+
+.preparing-step-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  min-height: 22px;
+  animation: fadeIn 0.4s ease;
+}
+
+/* ── İlerleme çubuğu ── */
+.preparing-progress-bar {
+  width: 220px;
+  height: 3px;
+  background: rgba(176, 126, 77, 0.15);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.preparing-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-coffee), var(--accent-gold));
+  border-radius: 4px;
+  animation: progressFill 2.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  width: 0%;
+}
+
+@keyframes progressFill {
+  0%   { width: 0%; }
+  40%  { width: 45%; }
+  70%  { width: 72%; }
+  100% { width: 100%; }
+}
+
+/* ── Genel yardımcı animasyonlar ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Fluid animations for dynamic input fields */
+.fade-in-input {
+  animation: slideDownIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+@keyframes slideDownIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
