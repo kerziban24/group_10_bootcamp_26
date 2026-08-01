@@ -1,5 +1,5 @@
 
-# 🚀 Takım 10 - Fintel
+# 🚀 Takım 10 - Sabah Turu
 
 ---
 
@@ -11,7 +11,6 @@
 - **Yasemin Akgül:** Scrum Master
 - **Kerziban Sicim:** Team Member / Developer
 - **Mehmet Anıl Köse:** Team Member / Developer
-- **Ahmet Kağan Ertürk:** Team Member / Developer
 
 ---
 
@@ -23,18 +22,18 @@
 
 ## 📝 Ürün Açıklaması
 
-Sabah Turu, kullanıcıların takip ettiği hisse senetleri, sektörler ve piyasa endekslerine özel, her sabah otomatik olarak üretilen kişiselleştirilmiş bir piyasa brifingi sunan bir web uygulamasıdır. Bir yapay zeka ajanı gece boyunca oluşan haberleri ve fiyat hareketlerini tarar, kullanıcının portföyüne göre önem sırasına koyar, duygu analizi yapar ve kısa bir özet üretir. Kullanıcılar ayrıca bir sohbet arayüzü üzerinden portföyleriyle ilgili doğal dilde sorular sorabilir.
+Sabah Turu, kullanıcıların takip ettiği hisse senetleri ve sektörlere özel, kişiselleştirilmiş bir piyasa brifingi ve sohbet asistanı sunan bir web uygulamasıdır. Kullanıcı kayıt olup kendi takip listesini oluşturur; uygulama, bu listeye göre güncel piyasa özetini üretir ve kullanıcının doğal dilde sorduğu sorulara yapay zeka destekli bir sohbet arayüzü üzerinden cevap verir. Günlük brifing isteğe bağlı olarak e-posta yoluyla da kullanıcıya iletilir.
 
 ---
 
 ## ⭐ Ürün Özellikleri
 
-- Kişiselleştirilmiş watchlist ve portföy yönetimi
-- Her sabah otomatik üretilen AI destekli piyasa brifingi (özet + duygu skoru)
-- Haberlerin önem sırasına göre etiketlenmesi
-- Portföy hakkında doğal dilde soru-cevap (RAG tabanlı sohbet)
-- E-posta ile günlük brifing gönderimi
-- Kullanıcı etkileşim geçmişine dayalı kişiselleştirme (hafıza)
+- Kullanıcı kayıt ve giriş sistemi
+- Kişiselleştirilmiş watchlist yönetimi (ekleme/silme/görüntüleme)
+- Yapay zeka destekli günlük piyasa brifingi üretimi (Groq API — LLaMA 3.3 70B)
+- Doğal dilde soru-cevap imkanı sunan AI sohbet arayüzü
+- Gmail SMTP üzerinden e-posta ile brifing gönderimi
+- Ayrık frontend/backend mimarisi sayesinde birden fazla giriş/çıkış noktası (çoklu istemci desteğine açık API yapısı)
 
 ---
 
@@ -102,10 +101,10 @@ Daily Scrum toplantılarının zamansal sebeplerden ötürü Slack üzerinden as
 
 Tamamlanan çalışmalar:
 
-- Airtable veri modeli kuruldu (Users, Watchlist, RawMarketData, RawNews, DailyBriefing, ChatHistory)
-- Finnhub API'den ilk gerçek fiyat verisi çekildi
-- Claude API ile ilk özetleme testi yapıldı
-- Bubble projesi açıldı, watchlist formu taslağı hazırlandı
+- İlk veri modeli tasarımı yapıldı (kullanıcı, watchlist, brifing verisi)
+- Finnhub API üzerinden ilk gerçek fiyat verisi çekildi
+- AI özetleme için ilk prompt testleri yapıldı
+- No-code araçlar (Airtable, Bubble, n8n) ile ilk prototip denemesi başlatıldı
 
 ---
 
@@ -121,21 +120,69 @@ Sprint 2'de eklenmesi gereken özellikler (n8n/Make otomasyonu, sentiment taggin
 
 **Sprint Review katılımcıları**
 
+Sümeyye, Anıl, Kerziban, Yasemin
+
 ---
 
 ## 🔄 Sprint Retrospective
 
 - Takım içindeki görev dağılımıyla ilgili küçük düzenlemeler yapılması kararı alınmıştır (veri ve AI katmanı arasındaki bağımlılıklar netleştirilecek).
 - Tahmin puanları gözden geçirilmeli ve sprint planlama toplantılarında developer'ların geri bildirim vermesine daha fazla zaman ayrılmalı.
-- API entegrasyonları için ayrılan efor/saat, rate-limit ve hata yönetimi göz önüne alınarak artırılmalı.
+- Kullanılan no-code araçların (API rate-limit, entegrasyon esnekliği) proje ihtiyaçlarını ne ölçüde karşıladığı ekipçe tartışılmaya başlanmıştır.
 
 ---
 
 # 🚀 Sprint 2
 
+## 📋 Sprint Planlaması
+
+Sprint 1'de kurulan no-code tabanlı iskele üzerinden ilerlenirken, ekip içinde tam kodlama (full-code) deneyimine sahip bir üyenin bulunması ve bu üyenin backend/frontend geliştirmeyi daha hızlı ve kontrollü şekilde yürütebileceğinin görülmesi üzerine, mimari kararın yeniden değerlendirilmesine karar verilmiştir. Bu doğrultuda Sprint 2'nin planlaması, mimari pivotun değerlendirilmesi ve yeni teknoloji yığınının temelinin atılmasına odaklanmıştır.
+
+## Sprint 2 içerisinde:
+
+React (Vite) tabanlı frontend projesi başlatıldı
+PHP tabanlı backend API iskeleti kuruldu (login, register, watchlist, briefing, chat endpoint'leri tanımlandı)
+MySQL veritabanı şeması tasarlandı
+Groq API (LLaMA 3.3 70B) entegrasyonu için ilk test çağrıları yapıldı
+
+## ✅ Sprint Review
+
+Alınan kararlar — Mimari Pivot
+
+Ekip, projenin kalan süresi ve gereksinimleri göz önünde bulundurularak no-code tabanlı yığından (Airtable/Bubble/n8n) tam kodlanmış bir yığına (React + PHP + MySQL + Groq API) geçiş yapılmasına karar vermiştir. Bu kararın gerekçeleri:
+
+Ekip deneyimi: Takım üyelerinden birinin full-stack geliştirme deneyimine sahip olması, bu yönde ilerlemenin daha hızlı ve güvenilir sonuç vereceği değerlendirilmiştir.
+Mimari esneklik: Özel kod tabanı, sisteme birden fazla giriş/çıkış noktası (farklı istemcilerin — web, olası mobil — aynı API'yi kullanabilmesi) eklemeyi kolaylaştırmaktadır; no-code platformların kapalı yapısına kıyasla bu noktada daha esnek bulunmuştur.
+Maliyet: Kendi barındırılan bir PHP/MySQL yapısı ve tek bir AI API'si (Groq), birden fazla no-code platform aboneliğine kıyasla daha düşük ve öngörülebilir maliyetli bulunmuştur.
+
+Bu karar, projenin kalan iki sprintlik sürecinde tüm geliştirme kapasitesinin bu yeni yığın üzerinde yoğunlaşmasını gerektirmiştir.
+
+Sprint Review katılımcıları: Sümeyye, Anıl, Kerziban, Yasemin
+
+## 🔄 Sprint Retrospective
+
+Mimari kararın Sprint 1'in başında değil Sprint 2'de alınmış olması, ilk sprintteki bazı efor harcamalarının (no-code prototipleme) doğrudan final ürüne taşınamamasına yol açmıştır; ekip bunu bir öğrenme noktası olarak not etmiştir.
+Full-code geçişin, kalan sürede fonksiyonel eksiksizliğe ulaşmak için doğru karar olduğu değerlendirilmiştir.
+Sprint 3'e girmeden önce backend endpoint'lerinin ve veritabanı şemasının netleştirilmiş olması, ekibin sonraki sprintte hızlı ilerlemesini kolaylaştırmıştır.
+
 ---
 
 # 🚀 Sprint 3
+
+## 📋 Sprint Planlaması
+
+Sprint 3, mimari pivot sonrası kalan tüm backlog'un tamamlanmasına ayrılmıştır. Bu sprint boyunca ürünün uçtan uca çalışır hale getirilmesi — kullanıcı kayıt/girişinden AI destekli brifing ve sohbet özelliğine, e-posta gönderimine kadar — hedeflenmiştir.
+
+## ✅ Sprint Review
+
+Ürün, teslim tarihine yetişecek şekilde uçtan uca çalışır duruma getirilmiştir. Tüm temel özellikler (kayıt/giriş, watchlist, AI brifing, AI sohbet, e-posta gönderimi) fonksiyoneldir ve test kullanıcısı ile doğrulanmıştır.
+
+Sprint Review katılımcıları: Yasemin, Anıl, Kerziban, Sümeyye
+
+## 🔄 Sprint Retrospective
+Mimari pivotun getirdiği risk, ekibin son sprintte yoğun ve odaklı çalışmasıyla yönetilebilmiştir.
+Backend/frontend ayrımının net olması, paralel çalışmayı (biri API'lerde, biri arayüzde) kolaylaştırmıştır.
+İleriye dönük not: benzer bir mimari karar gerekiyorsa, bunun ilk sprintin başında, ekip yetkinlikleri netleşir netleşmez alınması önerilir.
 
 # Sabah Turu — Kişisel Piyasa Asistanı
 
